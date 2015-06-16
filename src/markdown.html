@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>SPSSINC RANFOR Extension command</title>
+
+<link rel="stylesheet" type="text/css" href="extsyntax.css" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+<h1>SPSSINC RANFOR Extension command</h1>
+
+<p>Estimate a random forest.
+&#39;Random Forest&#39; is a trademark of Breiman and Cutler.</p>
+<div class="syntax">
+<p>SPSSINC RANFOR DEPENDENT=<em>dependent variable</em> ENTER=<em>variable list</em><sup>&#42;</sup><br/>
+UNSUPERVISED = NO<sup>&#42;&#42;</sup> or YES  </p>
+
+<p>/OPTIONS MISSING= RFIMPUTE<sup>&#42;&#42;</sup> or ROUGH or FAIL<br/>
+NUMTREES=<em>integer</em><br/>
+VARSSAMPLED=<em>integer</em><br/>
+CLASSPRIORS=<em>list of values</em><br/>
+MINNODESIZE=<em>integer</em><br/>
+RANDOMNUMBERSEED=<em>number</em>  </p>
+
+<p>/SAVE IMPUTEDDATASET=<em>datasetname</em><br/>
+PREDVALUES=<em>datasetname</em> OUTLIERS=<em>datasetname</em><br/>
+FOREST=&ldquo;<em>R filespec</em>&rdquo;<br/>
+RETAINFOREST=YES or NO<sup>&#42;&#42;</sup>  </p>
+
+<p>/PRINT VARUSAGE=NO<sup>&#42;&#42;</sup> or YES<sup>&#42;&#42;</sup>  </p>
+
+<p>/PLOT PARTIALPLOTS=<em>selectedpredictors</em> or ALL<br/>
+VARIABLEIMPORTANCE = NO<sup>&#42;&#42;</sup> or YES<br/>
+MDSPLOT=NO<sup>&#42;&#42;</sup> or YES<br/>
+MDSPLOTDIM=<em>integer</em>  </p>
+
+<p><sup>&#42;</sup> Required<br/>
+<sup>&#42;&#42;</sup> Default</p>
+</div>
+<p>SPSSINC RANFOR /HELP.  prints this information and does nothing else.</p>
+
+<pre class="example"><code>SPSSINC RANFOR DEPENDENT=mpg ENTER=engine weight.
+</code></pre>
+
+<p>Split files and weight are not honored by this command.</p>
+
+<p><strong>DEPENDENT</strong> and <strong>ENTER</strong> specify the dependent and independent
+variable names.
+Categorical  variables are automatically converted
+appropriately to factors.  If the dependent variable is categorical,
+classification is performed; otherwise regression is used.</p>
+
+<p><strong>UNSUPERVISED</strong> = YES can be used to analyze proximities among the cases.
+The dependent variable can be omitted in this case.  However,
+if a dependent variable is used, the output automatically includes 
+the MDS plot.</p>
+
+<h2>OPTIONS</h2>
+
+<p><strong>MISSING</strong> controls missing value behavior.  The choices are:</p>
+
+<ul>
+<li>RFIMPUTE causes a forest to be used to impute missing values
+in predictors.  The dependent variable may not have missing values.
+RFIMPUTE may not be used if UNSUPERVISED=YES.<br/></li>
+<li>ROUGH causes missing values to be imputed for all variables.<br/>
+Scale variables are imputed as the variable median, and categorical variables 
+as the mode with ties broken at random.<br/></li>
+<li>FAIL stops the procedure if missing values are encountered.</li>
+</ul>
+
+<p><strong>NUMTREES</strong> specifies the number of trees to use and defaults to 500.</p>
+
+<p><strong>VARSSAMPLED</strong> specifies the number of variables to consider at each 
+node split.  It defaults to the number of predictors/3 for a scale dependent 
+variable and sqrt(number of predictors) for a categorical variable.</p>
+
+<p><strong>CLASSPRIORS</strong> applies only to classification and specifies priors for each
+dependent variable category listed in ascending category order.<br/>
+The values need not sum to 1.</p>
+
+<p><strong>MINNODESIZE</strong> specifies the minimum size of terminal nodes in the tree.<br/>
+It defaults to 5 for regression and 1 for classification.</p>
+
+<p><strong>RANDOMNUMBERSEED</strong> sets the random number seed for
+reproducibility from run to run.  This affects only the R random number
+generator.</p>
+
+<h2>SAVE</h2>
+
+<p><strong>FOREST</strong> saves the actual R randomForest structure in an R workspace in the 
+specified file (typically with extension Rdata).  This option or RETAINFOREST should 
+be used if predictions are to be made with SPSSINC RANFOR PREDICT.  Predictions
+cannot be made if UNSUPERVISED=YES</p>
+
+<p>By default, the forest data structure is deleted from memory after results are produced.
+Use <strong>RETAINFOREST</strong> to keep the data structure in memory.  This is useful if
+proceeding to prediction with new data in the same session.  The data structure
+will be replaced if this command is rerun.</p>
+
+<p><strong>IMPUTEDDATASET</strong> names a dataset to be created with the data values after imputation.
+If no imputation is done but an imputed dataset name is specified, the data values 
+will be the same as the original data apart from any filter in effect.  Value labels and 
+missing value definitions are not applied but can be brought over using APPLY DICTIONARY.</p>
+
+<p><strong>PREDVALUES</strong> names a dataset to be created with the predicted values.  It will contain 
+only the cases sent to the analysis after any filter is applied.
+This is not available if UNSUPERVISED=YES</p>
+
+<p><strong>OUTLIERS</strong> names a dataset to be created with an outlier measure for each case in the 
+analysis.  It is only available for classification analysis.  The measure is
+n / sum(squared proximity), normalized by subtracting the median and divided by 
+the MAD, within each class.  The proximity matrix is of order n**2 where n is the number
+of cases, so use this option with caution.  If a dependent variable is
+not specified, which requires UNSUPERVISED=YES, all cases are considered
+to be in the same class.  If a dependent variable is specified, even if
+UNSUPERVISED=YES, it defines classes used for calculating this measure.</p>
+
+<h2>PRINT</h2>
+
+<p>The default Viewer output includes a summary table, the Variable Importance table, 
+and a plot of error rates versus the number of trees.  Additional output available is
+<strong>VARUSAGE</strong>, which shows the frequency of usage of each predictor variable in 
+the forest.  The error rate plot is not available if UNSUPERVISED=YES.</p>
+
+<h2>PLOT</h2>
+
+<p><strong>VARIABLEIMPORTANCE</strong> plots the variable importance</p>
+
+<p><strong>PARTIALPLOTS</strong> shows the marginal effect of the specified variables on the 
+response or the class probability.
+It can be ALL to plot all predictors or a list of predictors.
+Not available if UNSUPERVISED=YES.</p>
+
+<p><strong>MDSPLOT</strong> specifies whether or not to plot case proximities.  This
+is only available if there is a categorical dependent variable.  For
+a large dataset, a lot of memory is required.</p>
+
+<p><strong>MDSPLOTDIM</strong> specifies the number of dimensions for the plot.
+The default value is 2.</p>
+
+<p>This extension command requires the  R programmability plug-ins and 
+the R randomForest package.</p>
+
+</body>
+
+</html>
+
