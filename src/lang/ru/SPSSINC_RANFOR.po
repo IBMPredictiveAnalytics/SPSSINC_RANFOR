@@ -1,0 +1,364 @@
+#/***********************************************************************
+# * Licensed Materials - Property of IBM 
+# *
+# * IBM SPSS Products: Statistics Common
+# *
+# * (C) Copyright IBM Corp. 1989, 2014
+# *
+# * US Government Users Restricted Rights - Use, duplication or disclosure
+# * restricted by GSA ADP Schedule Contract with IBM Corp. 
+# ************************************************************************/
+
+# NLS_ENCODING=UTF-8
+# IBMUPYTH
+
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: SPSSINC_RANFOR.R:142
+msgid "The R %s package is required but could not be loaded."
+msgstr ""
+"Необходим пакет R %s, но его не удалось загрузить."
+
+#: SPSSINC_RANFOR.R:146
+msgid "Warning: The programfile keyword is no longer supported"
+msgstr ""
+"Предупреждение: Ключевое слово programfile более не поддерживается"
+
+#: SPSSINC_RANFOR.R:150
+msgid "A dependent variable must be specified except for the unsupervised case"
+msgstr ""
+"Зависимая переменная должна быть задана, но не для неконтролируемых наблюдений"
+
+#: SPSSINC_RANFOR.R:159
+msgid "The same predictor variable was entered more than once"
+msgstr ""
+"Одна и та же самая переменная-предиктор вводилась несколько раз"
+
+#: SPSSINC_RANFOR.R:166
+msgid "One or more specified output dataset names are already in use"
+msgstr ""
+"Одно или несколько имен наборов данных уже используются"
+
+#: SPSSINC_RANFOR.R:175
+msgid "unsupervised"
+msgstr ""
+"неконтролируемый"
+
+#: SPSSINC_RANFOR.R:177
+msgid "Unsupervised mode cannot be used with a scale dependent variable"
+msgstr ""
+"Неконтролируемый режим не может использоваться с количественной зависимой переменной"
+
+#: SPSSINC_RANFOR.R:181
+msgid "classification"
+msgstr ""
+"классификация"
+
+#: SPSSINC_RANFOR.R:181
+msgid "regression"
+msgstr ""
+"регрессия"
+
+#: SPSSINC_RANFOR.R:183
+msgid "The number of class priors specified differs from the number of levels of the dependent variable"
+msgstr ""
+"Число заданных априорных оценок класса отличается от числа уровней зависимой переменной"
+
+#: SPSSINC_RANFOR.R:188
+msgid "Class priors were specified, but the dependent variable is not categorical"
+msgstr ""
+"Заданы априорные оценки класса, но зависимая переменная - не категориальная"
+
+#: SPSSINC_RANFOR.R:194
+msgid "The MDS plot is only available for classification trees"
+msgstr ""
+"График MDS только доступен для деревьев классификации"
+
+#: SPSSINC_RANFOR.R:207
+msgid "Not Set"
+msgstr ""
+"Не задано"
+
+#: SPSSINC_RANFOR.R:212
+msgid "RF imputation is not available for the unsupervised case"
+msgstr ""
+"Импутация RF недоступна для неконтролируемого наблюдения"
+
+#: SPSSINC_RANFOR.R:245
+msgid "The error rate plot is not available in unsupervised mode."
+msgstr ""
+"График частоты ошибок недоступен в неконтролируемом режиме."
+
+#: SPSSINC_RANFOR.R:247
+msgid "Error Rates"
+msgstr ""
+"Частота ошибок"
+
+#: SPSSINC_RANFOR.R:252
+msgid "Variable Importance Plot"
+msgstr ""
+"Диаграмма важности переменных"
+
+#: SPSSINC_RANFOR.R:256
+msgid "The MDS plot is not available unless a dependent variable is specified"
+msgstr ""
+"График MDS недоступен, если не задана зависимая переменная"
+
+#: SPSSINC_RANFOR.R:258
+msgid "Multi-Dimensional Scaling Plot of Proximities"
+msgstr ""
+"MDS-график близостей"
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: 1st Quartile"
+msgstr ""
+"Конечные узлы размера дерева: 1-я квартиль"
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: Median"
+msgstr ""
+"Конечные узлы размера дерева: медиана"
+
+#: SPSSINC_RANFOR.R:268
+msgid "Tree Size Terminal Nodes: 3rd Quartile"
+msgstr ""
+"Конечные узлы размера дерева: 3-я квартиль"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Tree Type"
+msgstr ""
+"Тип дерева"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Dependent Variable"
+msgstr ""
+"Зависимая переменная"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Predictors"
+msgstr ""
+"Предикторы"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Trees"
+msgstr ""
+"Деревья"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Variable Tries Per Split"
+msgstr ""
+"Переменное число попыток на одно разбиение"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Predictor Imputation"
+msgstr ""
+"Импутация предикторов"
+
+#: SPSSINC_RANFOR.R:280
+msgid "Residual Mean Square"
+msgstr ""
+"Остаточный средний квадрат"
+
+#: SPSSINC_RANFOR.R:281
+msgid "Explained Variance Percentage"
+msgstr ""
+"Объясненный процент дисперсии"
+
+#: SPSSINC_RANFOR.R:283
+#: SPSSINC_RANFOR.R:304
+msgid "Random Number Seed"
+msgstr ""
+"Начальное значение генератора случайных чисел"
+
+#: SPSSINC_RANFOR.R:284
+#: SPSSINC_RANFOR.R:305
+msgid "Forest Workspace"
+msgstr ""
+"Рабочая область леса"
+
+#: SPSSINC_RANFOR.R:285
+#: SPSSINC_RANFOR.R:306
+msgid "Workspace retained in memory"
+msgstr ""
+"Рабочая область, сохраненная в памяти"
+
+#: SPSSINC_RANFOR.R:296
+msgid "--Not saved--"
+msgstr ""
+"--Не сохранено--"
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "Yes"
+msgstr ""
+"Да"
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "No"
+msgstr ""
+"Нет"
+
+#: SPSSINC_RANFOR.R:301
+msgid "Class Priors"
+msgstr ""
+"Априорные оценки класса"
+
+#: SPSSINC_RANFOR.R:302
+msgid "Out of Bag Estimated Error Rate"
+msgstr ""
+"Частота ошибок по оценке out-of-bag"
+
+#: SPSSINC_RANFOR.R:309
+msgid "None specified"
+msgstr ""
+"Не задано"
+
+#: SPSSINC_RANFOR.R:318
+msgid "Not saved"
+msgstr ""
+"Не сохранено"
+
+#: SPSSINC_RANFOR.R:323
+msgid "Random Forest Summary"
+msgstr ""
+"Сводка по случайному лесу"
+
+#: SPSSINC_RANFOR.R:324
+msgid "Random Forest computed by R randomForest package"
+msgstr ""
+"Случайный лес, сгенерированный пакетом R randomForest"
+
+#: SPSSINC_RANFOR.R:327
+msgid "Statistics"
+msgstr ""
+"Статистику"
+
+#: SPSSINC_RANFOR.R:338
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the Gini index"
+msgstr ""
+"Полное уменьшение неоднородности узлов из-за разбиения по переменной, усредненной по всем деревьям, для которых измерен индекс Джини"
+
+#: SPSSINC_RANFOR.R:340
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the residual sum of squares"
+msgstr ""
+"Полное уменьшение неоднородности узлов из-за разбиения по переменной, усредненной по всем деревьям, для которых измерена остаточная сумма квадратов"
+
+#: SPSSINC_RANFOR.R:344
+msgid "Variable Importance"
+msgstr ""
+"Важность переменной"
+
+#: SPSSINC_RANFOR.R:347
+msgid "Decrease in Node Impurity"
+msgstr ""
+"Уменьшение неоднородности узлов"
+
+#: SPSSINC_RANFOR.R:352
+msgid "Variable usage information is not available in unsupervised mode"
+msgstr ""
+"Информация об использовании переменной недоступна в неконтролируемом режиме"
+
+#: SPSSINC_RANFOR.R:355
+msgid "Predictor Variable Usage"
+msgstr ""
+"Использование переменной-предиктора"
+
+#: SPSSINC_RANFOR.R:356
+msgid "Frequencies of predictor variable usage in the forest"
+msgstr ""
+"Частоты использования переменных-предикторов в лесу"
+
+#: SPSSINC_RANFOR.R:359
+msgid "Frequency"
+msgstr ""
+"Частота"
+
+#: SPSSINC_RANFOR.R:372
+msgid "Column Total"
+msgstr ""
+"Итог по столбцу"
+
+#: SPSSINC_RANFOR.R:373
+#: SPSSINC_RANFOR.R:374
+msgid "Confusion Matrix of Predictions"
+msgstr ""
+"Матрица ошибок прогнозов"
+
+#: SPSSINC_RANFOR.R:376
+msgid "Rows are actuals; columns are predicted.  Last Class Error is the overall error rate."
+msgstr ""
+"Строки - это фактические значения, столбцы предсказываются. Ошибка последнего класса - это общая частота ошибок."
+
+#: SPSSINC_RANFOR.R:378
+msgid "Predicted"
+msgstr ""
+"Предсказанные"
+
+#: SPSSINC_RANFOR.R:379
+msgid "Class Error"
+msgstr ""
+"Ошибка класса"
+
+#: SPSSINC_RANFOR.R:379
+msgid "Row Total"
+msgstr ""
+"Всего строк"
+
+#: SPSSINC_RANFOR.R:392
+msgid "Partial Dependence: %s"
+msgstr ""
+"Частичная зависимость: %s"
+
+#: SPSSINC_RANFOR.R:411
+msgid "Warning: An outlier dataset was requested, but outliers are only available for classification trees:"
+msgstr ""
+"Предупреждение: Был затребован набор данных выбросов, но выбросы доступны только для деревьев классификации:"
+
+#: SPSSINC_RANFOR.R:434
+msgid "Error creating dataset: %s"
+msgstr ""
+"Ошибка при создании набора данных: %s"
+
+#: SPSSINC_RANFOR.R:441
+msgid "Predicted values are not available in unsupervised mode"
+msgstr ""
+"Предсказанные значения не доступны в неконтролируемом режиме"
+
+#: SPSSINC_RANFOR.R:447
+#: SPSSINC_RANFOR.R:468
+msgid "Case Number"
+msgstr ""
+"Номер наблюдения"
+
+#: SPSSINC_RANFOR.R:448
+msgid "predicted Values for %s"
+msgstr ""
+"предсказанные значения для %s"
+
+#: SPSSINC_RANFOR.R:454
+msgid "Failed to create predicted values dataset: %s."
+msgstr ""
+"Не удалось создать набор данных предсказанных значений: %s."
+
+#: SPSSINC_RANFOR.R:464
+msgid "Outlier measure (single class)"
+msgstr ""
+"Показатель выбросов (один класс)"
+
+#: SPSSINC_RANFOR.R:466
+msgid "Outlier measure (class defined by %s)"
+msgstr ""
+"Показатель выбросов (класс, определенный %s)"
+
+#: SPSSINC_RANFOR.R:480
+msgid "Failed to create outliers dataset: %s"
+msgstr ""
+"Не удалось создать набор данных выбросов: %s"
+
+
