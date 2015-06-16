@@ -1,0 +1,364 @@
+#/***********************************************************************
+# * Licensed Materials - Property of IBM 
+# *
+# * IBM SPSS Products: Statistics Common
+# *
+# * (C) Copyright IBM Corp. 1989, 2014
+# *
+# * US Government Users Restricted Rights - Use, duplication or disclosure
+# * restricted by GSA ADP Schedule Contract with IBM Corp. 
+# ************************************************************************/
+
+# NLS_ENCODING=UTF-8
+# IBMUPYTH
+
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: SPSSINC_RANFOR.R:142
+msgid "The R %s package is required but could not be loaded."
+msgstr ""
+"R %s 套件是必要套件，但無法載入。"
+
+#: SPSSINC_RANFOR.R:146
+msgid "Warning: The programfile keyword is no longer supported"
+msgstr ""
+"警告：不再受支援 programfile 關鍵字"
+
+#: SPSSINC_RANFOR.R:150
+msgid "A dependent variable must be specified except for the unsupervised case"
+msgstr ""
+"必須指定依變數，非監督式觀察值除外"
+
+#: SPSSINC_RANFOR.R:159
+msgid "The same predictor variable was entered more than once"
+msgstr ""
+"相同的解釋變數輸入超過一次"
+
+#: SPSSINC_RANFOR.R:166
+msgid "One or more specified output dataset names are already in use"
+msgstr ""
+"一或多個指定的輸出資料集名稱已在使用中"
+
+#: SPSSINC_RANFOR.R:175
+msgid "unsupervised"
+msgstr ""
+"非監督式"
+
+#: SPSSINC_RANFOR.R:177
+msgid "Unsupervised mode cannot be used with a scale dependent variable"
+msgstr ""
+"非監督式模式不能與尺度依變數搭配使用"
+
+#: SPSSINC_RANFOR.R:181
+msgid "classification"
+msgstr ""
+"分類"
+
+#: SPSSINC_RANFOR.R:181
+msgid "regression"
+msgstr ""
+"迴歸"
+
+#: SPSSINC_RANFOR.R:183
+msgid "The number of class priors specified differs from the number of levels of the dependent variable"
+msgstr ""
+"指定的類別事前機率數目與依變數層次數目不同"
+
+#: SPSSINC_RANFOR.R:188
+msgid "Class priors were specified, but the dependent variable is not categorical"
+msgstr ""
+"已指定類別事前機率，但依變數不是種類"
+
+#: SPSSINC_RANFOR.R:194
+msgid "The MDS plot is only available for classification trees"
+msgstr ""
+"MDS 圖只可用於分類樹狀結構"
+
+#: SPSSINC_RANFOR.R:207
+msgid "Not Set"
+msgstr ""
+"未設定"
+
+#: SPSSINC_RANFOR.R:212
+msgid "RF imputation is not available for the unsupervised case"
+msgstr ""
+"RF 插補無法用於非監督式觀察值"
+
+#: SPSSINC_RANFOR.R:245
+msgid "The error rate plot is not available in unsupervised mode."
+msgstr ""
+"錯誤率圖無法用於非監督式模式。"
+
+#: SPSSINC_RANFOR.R:247
+msgid "Error Rates"
+msgstr ""
+"錯誤率"
+
+#: SPSSINC_RANFOR.R:252
+msgid "Variable Importance Plot"
+msgstr ""
+"變數重要性圖形"
+
+#: SPSSINC_RANFOR.R:256
+msgid "The MDS plot is not available unless a dependent variable is specified"
+msgstr ""
+"MDS 圖無法使用，除非指定依變數"
+
+#: SPSSINC_RANFOR.R:258
+msgid "Multi-Dimensional Scaling Plot of Proximities"
+msgstr ""
+"近似性的多維尺度分析圖"
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: 1st Quartile"
+msgstr ""
+"樹狀結構大小終端機節點：第一個四分位數"
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: Median"
+msgstr ""
+"樹狀結構大小終端機節點：中位數"
+
+#: SPSSINC_RANFOR.R:268
+msgid "Tree Size Terminal Nodes: 3rd Quartile"
+msgstr ""
+"樹狀結構大小終端機節點：第三個四分位數"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Tree Type"
+msgstr ""
+"樹狀結構類型"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Dependent Variable"
+msgstr ""
+"依變數"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Predictors"
+msgstr ""
+"解釋變數"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Trees"
+msgstr ""
+"樹狀結構"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Variable Tries Per Split"
+msgstr ""
+"每分割變數嘗試次數"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Predictor Imputation"
+msgstr ""
+"解釋變數插補"
+
+#: SPSSINC_RANFOR.R:280
+msgid "Residual Mean Square"
+msgstr ""
+"殘差平均值平方"
+
+#: SPSSINC_RANFOR.R:281
+msgid "Explained Variance Percentage"
+msgstr ""
+"說明的變異數百分比"
+
+#: SPSSINC_RANFOR.R:283
+#: SPSSINC_RANFOR.R:304
+msgid "Random Number Seed"
+msgstr ""
+"亂數種子"
+
+#: SPSSINC_RANFOR.R:284
+#: SPSSINC_RANFOR.R:305
+msgid "Forest Workspace"
+msgstr ""
+"樹系工作區"
+
+#: SPSSINC_RANFOR.R:285
+#: SPSSINC_RANFOR.R:306
+msgid "Workspace retained in memory"
+msgstr ""
+"保留在記憶體中的工作區"
+
+#: SPSSINC_RANFOR.R:296
+msgid "--Not saved--"
+msgstr ""
+"--未儲存--"
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "Yes"
+msgstr ""
+"是"
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "No"
+msgstr ""
+"否"
+
+#: SPSSINC_RANFOR.R:301
+msgid "Class Priors"
+msgstr ""
+"類別事前機率"
+
+#: SPSSINC_RANFOR.R:302
+msgid "Out of Bag Estimated Error Rate"
+msgstr ""
+"超出工具袋估計錯誤率"
+
+#: SPSSINC_RANFOR.R:309
+msgid "None specified"
+msgstr ""
+"未指定"
+
+#: SPSSINC_RANFOR.R:318
+msgid "Not saved"
+msgstr ""
+"未儲存"
+
+#: SPSSINC_RANFOR.R:323
+msgid "Random Forest Summary"
+msgstr ""
+"隨機樹系摘要"
+
+#: SPSSINC_RANFOR.R:324
+msgid "Random Forest computed by R randomForest package"
+msgstr ""
+"由 R randomForest 套件計算的隨機樹系"
+
+#: SPSSINC_RANFOR.R:327
+msgid "Statistics"
+msgstr ""
+"Statistics"
+
+#: SPSSINC_RANFOR.R:338
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the Gini index"
+msgstr ""
+"透過在 Gini 指數測量的所有樹狀結構平均變數上進行分割，減少的節點雜質總計"
+
+#: SPSSINC_RANFOR.R:340
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the residual sum of squares"
+msgstr ""
+"透過在殘差平方和測量的所有樹狀結構平均變數上進行分割，減少的節點雜質總計"
+
+#: SPSSINC_RANFOR.R:344
+msgid "Variable Importance"
+msgstr ""
+"變數重要性"
+
+#: SPSSINC_RANFOR.R:347
+msgid "Decrease in Node Impurity"
+msgstr ""
+"節點雜質的減少"
+
+#: SPSSINC_RANFOR.R:352
+msgid "Variable usage information is not available in unsupervised mode"
+msgstr ""
+"變數使用情形資訊在非監督式模式中無法使用"
+
+#: SPSSINC_RANFOR.R:355
+msgid "Predictor Variable Usage"
+msgstr ""
+"解釋變數使用情形"
+
+#: SPSSINC_RANFOR.R:356
+msgid "Frequencies of predictor variable usage in the forest"
+msgstr ""
+"樹系中解釋變數使用的次數分配表"
+
+#: SPSSINC_RANFOR.R:359
+msgid "Frequency"
+msgstr ""
+"次數分配表"
+
+#: SPSSINC_RANFOR.R:372
+msgid "Column Total"
+msgstr ""
+"直欄總計"
+
+#: SPSSINC_RANFOR.R:373
+#: SPSSINC_RANFOR.R:374
+msgid "Confusion Matrix of Predictions"
+msgstr ""
+"預測的混淆矩陣"
+
+#: SPSSINC_RANFOR.R:376
+msgid "Rows are actuals; columns are predicted.  Last Class Error is the overall error rate."
+msgstr ""
+"列為實際值；直欄為預測值。前次類別錯誤是整體錯誤率。"
+
+#: SPSSINC_RANFOR.R:378
+msgid "Predicted"
+msgstr ""
+"預測值"
+
+#: SPSSINC_RANFOR.R:379
+msgid "Class Error"
+msgstr ""
+"類別錯誤"
+
+#: SPSSINC_RANFOR.R:379
+msgid "Row Total"
+msgstr ""
+"列總計"
+
+#: SPSSINC_RANFOR.R:392
+msgid "Partial Dependence: %s"
+msgstr ""
+"局部依賴性：%s"
+
+#: SPSSINC_RANFOR.R:411
+msgid "Warning: An outlier dataset was requested, but outliers are only available for classification trees:"
+msgstr ""
+"警告：要求離群值資料集，但離群值只可用於分類樹狀結構："
+
+#: SPSSINC_RANFOR.R:434
+msgid "Error creating dataset: %s"
+msgstr ""
+"建立資料集時發生錯誤：%s"
+
+#: SPSSINC_RANFOR.R:441
+msgid "Predicted values are not available in unsupervised mode"
+msgstr ""
+"預測值在非監督式模式中無法使用"
+
+#: SPSSINC_RANFOR.R:447
+#: SPSSINC_RANFOR.R:468
+msgid "Case Number"
+msgstr ""
+"觀察值數目"
+
+#: SPSSINC_RANFOR.R:448
+msgid "predicted Values for %s"
+msgstr ""
+"%s 的預測值"
+
+#: SPSSINC_RANFOR.R:454
+msgid "Failed to create predicted values dataset: %s."
+msgstr ""
+"無法建立預測值資料集：%s。"
+
+#: SPSSINC_RANFOR.R:464
+msgid "Outlier measure (single class)"
+msgstr ""
+"離群值測量（單一類別）"
+
+#: SPSSINC_RANFOR.R:466
+msgid "Outlier measure (class defined by %s)"
+msgstr ""
+"離群值測量（由 %s 定義的類別）"
+
+#: SPSSINC_RANFOR.R:480
+msgid "Failed to create outliers dataset: %s"
+msgstr ""
+"無法建立離群值資料集：%s"
+
+
