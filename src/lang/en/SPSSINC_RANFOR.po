@@ -1,0 +1,297 @@
+#/***********************************************************************
+# * Licensed Materials - Property of IBM 
+# *
+# * IBM SPSS Products: Statistics Common
+# *
+# * (C) Copyright IBM Corp. 1989, 2014
+# *
+# * US Government Users Restricted Rights - Use, duplication or disclosure
+# * restricted by GSA ADP Schedule Contract with IBM Corp. 
+# ************************************************************************/
+
+# NLS_ENCODING=UTF-8
+# IBMUPYTH
+
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: SPSSINC_RANFOR.R:142
+msgid "The R %s package is required but could not be loaded."
+msgstr ""
+
+#: SPSSINC_RANFOR.R:146
+msgid "Warning: The programfile keyword is no longer supported"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:150
+msgid "A dependent variable must be specified except for the unsupervised case"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:159
+msgid "The same predictor variable was entered more than once"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:166
+msgid "One or more specified output dataset names are already in use"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:175
+msgid "unsupervised"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:177
+msgid "Unsupervised mode cannot be used with a scale dependent variable"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:181
+msgid "classification"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:181
+msgid "regression"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:183
+msgid "The number of class priors specified differs from the number of levels of the dependent variable"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:188
+msgid "Class priors were specified, but the dependent variable is not categorical"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:194
+msgid "The MDS plot is only available for classification trees"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:207
+msgid "Not Set"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:212
+msgid "RF imputation is not available for the unsupervised case"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:245
+msgid "The error rate plot is not available in unsupervised mode."
+msgstr ""
+
+#: SPSSINC_RANFOR.R:247
+msgid "Error Rates"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:252
+msgid "Variable Importance Plot"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:256
+msgid "The MDS plot is not available unless a dependent variable is specified"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:258
+msgid "Multi-Dimensional Scaling Plot of Proximities"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: 1st Quartile"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: Median"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:268
+msgid "Tree Size Terminal Nodes: 3rd Quartile"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:273
+msgid "Tree Type"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:273
+msgid "Dependent Variable"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:273
+msgid "Predictors"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:274
+msgid "Trees"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:274
+msgid "Variable Tries Per Split"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:274
+msgid "Predictor Imputation"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:280
+msgid "Residual Mean Square"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:281
+msgid "Explained Variance Percentage"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:283
+#: SPSSINC_RANFOR.R:304
+msgid "Random Number Seed"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:284
+#: SPSSINC_RANFOR.R:305
+msgid "Forest Workspace"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:285
+#: SPSSINC_RANFOR.R:306
+msgid "Workspace retained in memory"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:296
+msgid "--Not saved--"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "Yes"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "No"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:301
+msgid "Class Priors"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:302
+msgid "Out of Bag Estimated Error Rate"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:309
+msgid "None specified"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:318
+msgid "Not saved"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:323
+msgid "Random Forest Summary"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:324
+msgid "Random Forest computed by R randomForest package"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:327
+msgid "Statistics"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:338
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the Gini index"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:340
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the residual sum of squares"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:344
+msgid "Variable Importance"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:347
+msgid "Decrease in Node Impurity"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:352
+msgid "Variable usage information is not available in unsupervised mode"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:355
+msgid "Predictor Variable Usage"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:356
+msgid "Frequencies of predictor variable usage in the forest"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:359
+msgid "Frequency"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:372
+msgid "Column Total"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:373
+#: SPSSINC_RANFOR.R:374
+msgid "Confusion Matrix of Predictions"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:376
+msgid "Rows are actuals; columns are predicted.  Last Class Error is the overall error rate."
+msgstr ""
+
+#: SPSSINC_RANFOR.R:378
+msgid "Predicted"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:379
+msgid "Class Error"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:379
+msgid "Row Total"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:392
+msgid "Partial Dependence: %s"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:411
+msgid "Warning: An outlier dataset was requested, but outliers are only available for classification trees:"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:434
+msgid "Error creating dataset: %s"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:441
+msgid "Predicted values are not available in unsupervised mode"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:447
+#: SPSSINC_RANFOR.R:468
+msgid "Case Number"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:448
+msgid "predicted Values for %s"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:454
+msgid "Failed to create predicted values dataset: %s."
+msgstr ""
+
+#: SPSSINC_RANFOR.R:464
+msgid "Outlier measure (single class)"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:466
+msgid "Outlier measure (class defined by %s)"
+msgstr ""
+
+#: SPSSINC_RANFOR.R:480
+msgid "Failed to create outliers dataset: %s"
+msgstr ""
+
+
