@@ -1,0 +1,364 @@
+#/***********************************************************************
+# * Licensed Materials - Property of IBM 
+# *
+# * IBM SPSS Products: Statistics Common
+# *
+# * (C) Copyright IBM Corp. 1989, 2014
+# *
+# * US Government Users Restricted Rights - Use, duplication or disclosure
+# * restricted by GSA ADP Schedule Contract with IBM Corp. 
+# ************************************************************************/
+
+# NLS_ENCODING=UTF-8
+# IBMUPYTH
+
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+#: SPSSINC_RANFOR.R:142
+msgid "The R %s package is required but could not be loaded."
+msgstr ""
+"R %s 패키지가 필요하지만 로드할 수 없습니다."
+
+#: SPSSINC_RANFOR.R:146
+msgid "Warning: The programfile keyword is no longer supported"
+msgstr ""
+"경고: programfile 키워드가 더 이상 지원되지 않습니다."
+
+#: SPSSINC_RANFOR.R:150
+msgid "A dependent variable must be specified except for the unsupervised case"
+msgstr ""
+"비지도 케이스를 제외하고 종속변수를 지정해야 합니다."
+
+#: SPSSINC_RANFOR.R:159
+msgid "The same predictor variable was entered more than once"
+msgstr ""
+"동일한 예측자 변수를 두 번 이상 입력했습니다."
+
+#: SPSSINC_RANFOR.R:166
+msgid "One or more specified output dataset names are already in use"
+msgstr ""
+"하나 이상의 지정된 출력 데이터 세트 이름이 이미 사용 중입니다."
+
+#: SPSSINC_RANFOR.R:175
+msgid "unsupervised"
+msgstr ""
+"비지도"
+
+#: SPSSINC_RANFOR.R:177
+msgid "Unsupervised mode cannot be used with a scale dependent variable"
+msgstr ""
+"비지도 모드는 척도 종속변수와 함께 사용할 수 없습니다."
+
+#: SPSSINC_RANFOR.R:181
+msgid "classification"
+msgstr ""
+"분류"
+
+#: SPSSINC_RANFOR.R:181
+msgid "regression"
+msgstr ""
+"회귀분석"
+
+#: SPSSINC_RANFOR.R:183
+msgid "The number of class priors specified differs from the number of levels of the dependent variable"
+msgstr ""
+"지정된 계층 사전확률 수가 종속변수의 수준 수와 다릅니다."
+
+#: SPSSINC_RANFOR.R:188
+msgid "Class priors were specified, but the dependent variable is not categorical"
+msgstr ""
+"계층 사전확률을 지정했지만 종속변수가 범주형 변수가 아닙니다."
+
+#: SPSSINC_RANFOR.R:194
+msgid "The MDS plot is only available for classification trees"
+msgstr ""
+"MDS 도표는 분류나무에만 사용할 수 있습니다."
+
+#: SPSSINC_RANFOR.R:207
+msgid "Not Set"
+msgstr ""
+"설정되지 않음"
+
+#: SPSSINC_RANFOR.R:212
+msgid "RF imputation is not available for the unsupervised case"
+msgstr ""
+"RF 대체는 비지도 케이스에 대해 사용할 수 없습니다."
+
+#: SPSSINC_RANFOR.R:245
+msgid "The error rate plot is not available in unsupervised mode."
+msgstr ""
+"비지도 모드에서는 오차율 도표를 사용할 수 없습니다."
+
+#: SPSSINC_RANFOR.R:247
+msgid "Error Rates"
+msgstr ""
+"오차율"
+
+#: SPSSINC_RANFOR.R:252
+msgid "Variable Importance Plot"
+msgstr ""
+"변수 중요도 도표"
+
+#: SPSSINC_RANFOR.R:256
+msgid "The MDS plot is not available unless a dependent variable is specified"
+msgstr ""
+"종속변수를 지정하지 않은 경우 MDS 도표를 사용할 수 없습니다."
+
+#: SPSSINC_RANFOR.R:258
+msgid "Multi-Dimensional Scaling Plot of Proximities"
+msgstr ""
+"근접도에 대한 다차원 척도 도표"
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: 1st Quartile"
+msgstr ""
+"나무 크기 터미널 노드: 1분위수"
+
+#: SPSSINC_RANFOR.R:267
+msgid "Tree Size Terminal Nodes: Median"
+msgstr ""
+"나무 크기 터미널 노드: 중위수"
+
+#: SPSSINC_RANFOR.R:268
+msgid "Tree Size Terminal Nodes: 3rd Quartile"
+msgstr ""
+"나무 크기 터미널 노드: 3분위수"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Tree Type"
+msgstr ""
+"나무 유형"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Dependent Variable"
+msgstr ""
+"종속변수"
+
+#: SPSSINC_RANFOR.R:273
+msgid "Predictors"
+msgstr ""
+"예측자"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Trees"
+msgstr ""
+"나무"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Variable Tries Per Split"
+msgstr ""
+"분할당 변수 시도 횟수"
+
+#: SPSSINC_RANFOR.R:274
+msgid "Predictor Imputation"
+msgstr ""
+"예측자 대체"
+
+#: SPSSINC_RANFOR.R:280
+msgid "Residual Mean Square"
+msgstr ""
+"잔차 평균제곱"
+
+#: SPSSINC_RANFOR.R:281
+msgid "Explained Variance Percentage"
+msgstr ""
+"설명되지 않는 분산 백분율"
+
+#: SPSSINC_RANFOR.R:283
+#: SPSSINC_RANFOR.R:304
+msgid "Random Number Seed"
+msgstr ""
+"난수 시작값"
+
+#: SPSSINC_RANFOR.R:284
+#: SPSSINC_RANFOR.R:305
+msgid "Forest Workspace"
+msgstr ""
+"포리스트 작업공간"
+
+#: SPSSINC_RANFOR.R:285
+#: SPSSINC_RANFOR.R:306
+msgid "Workspace retained in memory"
+msgstr ""
+"메모리에 작업공간 유지"
+
+#: SPSSINC_RANFOR.R:296
+msgid "--Not saved--"
+msgstr ""
+"--저장되지 않음--"
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "Yes"
+msgstr ""
+"예"
+
+#: SPSSINC_RANFOR.R:297
+#: SPSSINC_RANFOR.R:319
+msgid "No"
+msgstr ""
+"아니오"
+
+#: SPSSINC_RANFOR.R:301
+msgid "Class Priors"
+msgstr ""
+"계층 사전확률"
+
+#: SPSSINC_RANFOR.R:302
+msgid "Out of Bag Estimated Error Rate"
+msgstr ""
+"Out of Bag 추정된 오차율"
+
+#: SPSSINC_RANFOR.R:309
+msgid "None specified"
+msgstr ""
+"지정되지 않음"
+
+#: SPSSINC_RANFOR.R:318
+msgid "Not saved"
+msgstr ""
+"저장되지 않음"
+
+#: SPSSINC_RANFOR.R:323
+msgid "Random Forest Summary"
+msgstr ""
+"랜덤 포리스트 요약"
+
+#: SPSSINC_RANFOR.R:324
+msgid "Random Forest computed by R randomForest package"
+msgstr ""
+"R randomForest 패키지에 의해 계산된 랜덤 포리스트"
+
+#: SPSSINC_RANFOR.R:327
+msgid "Statistics"
+msgstr ""
+"통계량2"
+
+#: SPSSINC_RANFOR.R:338
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the Gini index"
+msgstr ""
+"Gini 인덱스로 측정된 모든 나무에 대한 평균 변수의 분할에서 노드 불순도의 총 감소량"
+
+#: SPSSINC_RANFOR.R:340
+msgid "Total decrease in node impurities from splitting on the variable averaged over all trees measured by the residual sum of squares"
+msgstr ""
+"잔차 제곱합으로 측정된 모든 나무에 대한 평균 변수의 분할에서 노드 불순도의 총 감소량"
+
+#: SPSSINC_RANFOR.R:344
+msgid "Variable Importance"
+msgstr ""
+"변수 중요도"
+
+#: SPSSINC_RANFOR.R:347
+msgid "Decrease in Node Impurity"
+msgstr ""
+"노드 불순도 감소"
+
+#: SPSSINC_RANFOR.R:352
+msgid "Variable usage information is not available in unsupervised mode"
+msgstr ""
+"비지도 모드에서는 변수 사용 정보를 사용할 수 없습니다."
+
+#: SPSSINC_RANFOR.R:355
+msgid "Predictor Variable Usage"
+msgstr ""
+"예측자 변수 사용"
+
+#: SPSSINC_RANFOR.R:356
+msgid "Frequencies of predictor variable usage in the forest"
+msgstr ""
+"포리스트의 예측자 변수 사용 빈도"
+
+#: SPSSINC_RANFOR.R:359
+msgid "Frequency"
+msgstr ""
+"구매빈도"
+
+#: SPSSINC_RANFOR.R:372
+msgid "Column Total"
+msgstr ""
+"열 총계"
+
+#: SPSSINC_RANFOR.R:373
+#: SPSSINC_RANFOR.R:374
+msgid "Confusion Matrix of Predictions"
+msgstr ""
+"예측의 혼돈 행렬"
+
+#: SPSSINC_RANFOR.R:376
+msgid "Rows are actuals; columns are predicted.  Last Class Error is the overall error rate."
+msgstr ""
+"행은 실제값이며 열은 예측값입니다. 마지막 계층 오차는 전체 오차율입니다."
+
+#: SPSSINC_RANFOR.R:378
+msgid "Predicted"
+msgstr ""
+"예측빈도"
+
+#: SPSSINC_RANFOR.R:379
+msgid "Class Error"
+msgstr ""
+"계층 오차"
+
+#: SPSSINC_RANFOR.R:379
+msgid "Row Total"
+msgstr ""
+"행 합계"
+
+#: SPSSINC_RANFOR.R:392
+msgid "Partial Dependence: %s"
+msgstr ""
+"편 종속성: %s"
+
+#: SPSSINC_RANFOR.R:411
+msgid "Warning: An outlier dataset was requested, but outliers are only available for classification trees:"
+msgstr ""
+"경고: 이상값 데이터 세트를 요청했지만 이상값은 분류나무에만 사용할 수 있습니다."
+
+#: SPSSINC_RANFOR.R:434
+msgid "Error creating dataset: %s"
+msgstr ""
+"데이터 세트 작성 시 오류 발생: %s"
+
+#: SPSSINC_RANFOR.R:441
+msgid "Predicted values are not available in unsupervised mode"
+msgstr ""
+"비지도 모드에서는 예측값을 사용할 수 없습니다."
+
+#: SPSSINC_RANFOR.R:447
+#: SPSSINC_RANFOR.R:468
+msgid "Case Number"
+msgstr ""
+"케이스 번호"
+
+#: SPSSINC_RANFOR.R:448
+msgid "predicted Values for %s"
+msgstr ""
+"%s에 대한 예측값"
+
+#: SPSSINC_RANFOR.R:454
+msgid "Failed to create predicted values dataset: %s."
+msgstr ""
+"예측값 데이터 세트 %s을(를) 작성하지 못했습니다."
+
+#: SPSSINC_RANFOR.R:464
+msgid "Outlier measure (single class)"
+msgstr ""
+"이상값 측도(단일 계층)"
+
+#: SPSSINC_RANFOR.R:466
+msgid "Outlier measure (class defined by %s)"
+msgstr ""
+"이상값 측도(%s에 의해 정의된 계층)"
+
+#: SPSSINC_RANFOR.R:480
+msgid "Failed to create outliers dataset: %s"
+msgstr ""
+"이상값 데이터 세트 %s을(를) 작성하지 못했습니다."
+
+
