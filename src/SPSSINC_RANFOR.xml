@@ -1,0 +1,51 @@
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Jon Peck (SPSS Inc.) -->
+<!-- ***************************************************************** -->
+<!--                                                                   -->
+<!-- Licensed Materials - Property of IBM                              -->
+<!--                                                                   -->
+<!-- IBM SPSS Products: Statistics Common                              -->
+<!--                                                                   -->
+<!-- (C) Copyright IBM Corp. 1989, 2013                                -->
+<!--                                                                   -->
+<!-- US Government Users Restricted Rights - Use, duplication or       -->
+<!-- disclosure restricted by GSA ADP Schedule Contract with IBM       -->
+<!-- Corp.                                                             -->
+<!--                                                                   -->
+<!-- ***************************************************************** -->
+<Command xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extension-1.0.xsd" Name="SPSSINC RANFOR" Language="R">
+	<Subcommand Name="" IsArbitrary="False" Occurrence="Optional">
+		<Parameter Name="DEPENDENT" ParameterType="VariableName"/>
+		<Parameter Name="ENTER" ParameterType="VariableNameList"/>
+		<Parameter Name="UNSUPERVISED" ParameterType="Keyword"/>
+	</Subcommand>
+	<Subcommand Name="OPTIONS">
+		<Parameter Name="MISSING" ParameterType="Keyword">
+			<EnumValue Name="RFIMPUTE"/>
+			<EnumValue Name="FAIL"/>
+			<EnumValue Name="ROUGH"/>
+		</Parameter>
+		<Parameter Name="NUMTREES" ParameterType="Integer"/>
+		<Parameter Name="VARSSAMPLED" ParameterType="Integer"/>
+		<Parameter Name="CLASSPRIORS" ParameterType="NumberList"/>
+		<Parameter Name="MINNODESIZE" ParameterType="Integer"/>
+		<Parameter Name="RANDOMNUMBERSEED" ParameterType="Number"/>
+	</Subcommand>
+	<Subcommand Name="SAVE" Occurrence="Optional">
+		<Parameter Name="IMPUTEDDATASET" ParameterType="DatasetName"/>
+		<Parameter Name="PREDVALUES" ParameterType="DatasetName"/>
+		<Parameter Name="OUTLIERS" ParameterType="DatasetName"/>
+		<Parameter Name="FOREST" ParameterType="OutputFile"/>
+		<Parameter Name="RETAINFOREST" ParameterType="LeadingToken"/>
+		<Parameter Name="PROGRAMFILE" ParameterType="OutputFile"/>
+	</Subcommand>
+	<Subcommand Name="PRINT" Occurrence="Optional">
+		<Parameter Name="VARUSAGE" ParameterType="LeadingToken"/>
+	</Subcommand>
+	<Subcommand Name="PLOT" Occurrence="Optional">
+		<Parameter Name="PARTIALPLOTS" ParameterType="TokenList"/>
+		<Parameter Name="VARIABLEIMPORTANCE" ParameterType="LeadingToken"/>
+		<Parameter Name="MDSPLOT" ParameterType="Keyword"/>
+		<Parameter Name="MDSPLOTDIM" ParameterType="Integer"/>
+	</Subcommand>
+	<Subcommand Name="HELP" Occurrence="Optional"/>
+</Command>
