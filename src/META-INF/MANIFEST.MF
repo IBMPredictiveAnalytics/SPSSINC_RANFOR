@@ -1,0 +1,20 @@
+Name: SPSSINC RANFOR
+Dialog-Specs: SPSSINC_RANFOR.spd
+Command-Specs: SPSSINC_RANFOR.xml
+Code-Files: SPSSINC_RANFOR.R
+Misc-Files: extsyntax.css,markdown.html,IBMdialogicon.png
+Summary: Estimate random forest
+Description: This procedure builds random forests of classification or
+  regression trees.  It also supports unsupervised mode, in which case
+  proximities are calculated.  The companion procedure SPSSINC RANPRED
+  calculates predictions for new data using the forest built by this p
+ rocedure.  Note: this version is a major rewrite of the older SPSSINC
+  RANFOR procedure and  no longer requires the Python plugin.
+Author: JKP, IBM SPSS
+Version: 1.1.5
+Product-Version: 18
+Date: 4/15/2013
+Categories: spss randomforest r
+Plugins: R
+R-Packages: randomForest
+Translation-Catalogues: lang
