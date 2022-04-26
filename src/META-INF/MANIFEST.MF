@@ -11,7 +11,7 @@ Description: This procedure builds random forests of classification or
  rocedure.  Note: this version is a major rewrite of the older SPSSINC
   RANFOR procedure and  no longer requires the Python plugin.
 Author: JKP, IBM SPSS
-Version: 1.1.5
+Version: 1.1.6
 Product-Version: 18
 Date: 4/15/2013
 Categories: spss randomforest r
