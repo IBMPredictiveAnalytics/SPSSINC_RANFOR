@@ -1,4 +1,5 @@
 Name: SPSSINC RANFOR
+Display-Name: Random Forest
 Dialog-Specs: SPSSINC_RANFOR.spd
 Command-Specs: SPSSINC_RANFOR.xml
 Code-Files: SPSSINC_RANFOR.R
@@ -11,7 +12,7 @@ Description: This procedure builds random forests of classification or
  rocedure.  Note: this version is a major rewrite of the older SPSSINC
   RANFOR procedure and  no longer requires the Python plugin.
 Author: JKP, IBM SPSS
-Version: 1.1.6
+Version: 1.1.5
 Product-Version: 18
 Date: 4/15/2013
 Categories: spss randomforest r
