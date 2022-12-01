@@ -3,23 +3,23 @@
 # *
 # * IBM SPSS Products: Statistics Common
 # *
-# * (C) Copyright IBM Corp. 1989, 2015
+# * (C) Copyright IBM Corp. 1989, 2022
 # *
 # * US Government Users Restricted Rights - Use, duplication or disclosure
 # * restricted by GSA ADP Schedule Contract with IBM Corp. 
 # ************************************************************************/
-# module to run an R program as an Extension command
-
 
 #__author__ = "SPSS, JKP"
-#__version__ = "1.1.1"
+#__version__ = "1.2.0"
 
 # History
 # 30-Sep-2008 Original version
 # 12-Nov-2008  Improve line wrapping strategy for very long variable lists.
 # 10-Apr-2013 Rewrite to simplify and eliminate need for Python plugin
-# 24-May-2013 Tinker with display parameteres in var imp plot to deal with long names
+# 24-May-2013 Tinker with display parameters in var imp plot to deal with long names
+# 26-nOV-2022 Add support for a case id variable in output files and add dep var to outliers dataset.
 
+# helptext is no longer maintained in favor the syntax help file
 
 helptext="SPSSINC RANFOR DEPENDENT=dependent variable ENTER=variable list
 UNSUPERVISED = {NO* | YES}
@@ -128,15 +128,23 @@ This extension command requires the  R programmability plug-ins and
 the R randomForest package.
 "
 
+###options(error=traceback)
 
 ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=NULL, minnodesize=NULL,
     classpriors=NULL, unsupervised=FALSE,
     predvalues=NULL, imputeddataset=NULL, forest=NULL,
     importance=TRUE, varusage=FALSE, partialplots=NULL, seed=NULL, 
     mdsplot=FALSE, mdsplotdim=2, programfile=NULL,
-    variableimportance=FALSE, outlierds=NULL, errorrates=TRUE, retainforest=FALSE) {
+    variableimportance=FALSE, outlierds=NULL, errorrates=TRUE, retainforest=FALSE,
+    caseid=NULL) {
     
     setuplocalization()
+    if (!is.null(spssdictionary.GetWeightVariable())) {
+      stop(gtxt("The SPSSINC RANFOR procedure does not support weights"))
+    }
+    if (!is.null(spssdata.GetSplitVariableNames())) {
+      print(gtxt("Warning: SPLIT FILES is not supported by SPSSINC RANFOR.  Splits will be ignored."))
+    }
 
     tryCatch(library(randomForest), error=function(e){
         stop(gtxtf("The R %s package is required but could not be loaded.","randomForest"),call.=FALSE)
@@ -150,7 +158,7 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
         stop(gtxt("A dependent variable must be specified except for the unsupervised case"), call.=FALSE)
     }
     
-    allvars = c(dep, indep)  # if dep is null (unsupervised), it disappears from allvars
+    allvars = c(dep, indep, caseid)  # if dep or caseid is null (unsupervised), it disappears from allvars
     model = paste(indep, collapse="+")
     if (!unsupervised) {
         model = paste(dep, model, sep="~")
@@ -183,6 +191,13 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             stop(gtxt("The number of class priors specified differs from the number of levels of the dependent variable"),
                 call.=FALSE)
         }
+    }
+    if (!is.null(caseid)) {
+      caseiddta = dta[ncol(dta)]
+      dta = dta[-ncol(dta)]
+    } else {
+      caseiddta = NULL
+      
     }
     if (!classify && !is.null(classpriors)) {
         stop(gtxt("Class priors were specified, but the dependent variable is not categorical"), call.=FALSE)
@@ -218,7 +233,7 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
       dta= data.frame(dta[1], tryCatch(
         rfImpute(dta[,-1], y=dta[,1], minnodesize=minnodesize), error=function(e) {print(e); return(dta)})[-1])
     } else if (missing == "rough") {
-      dta = na.roughfix(dta)
+        dta = na.roughfix(dta)
     }
 
     if (is.null(varssampled)) {
@@ -312,7 +327,12 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             tsstatslbls,
             gtxt("Random Number Seed"), 
             gtxt("Forest Workspace"), 
-            gtxt("Workspace retained in memory")
+            gtxt("Workspace retained in memory"),
+            gtxt("Case ID variable"),
+            gtxt("Imputed dataset"),
+            gtxt("Predicted values dataset"),
+            gtxt("Outliers dataset")
+            
         )
         tbl1values=c(res$type, 
             ifelse(is.null(dep), gtxt("None specified"), dep), 
@@ -325,12 +345,16 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             tsstats, 
             seed, 
             ifelse(!is.null(forest), forest,gtxt("Not saved")), 
-            ifelse(retainforest, gtxt("Yes"), gtxt("No"))
+            ifelse(retainforest, gtxt("Yes"), gtxt("No")),
+            ifelse(is.null(caseid), gtxt("-None-"), caseid),
+            ifelse(is.null(imputeddataset) || missing == "fail", gtxt("-None-"), imputeddataset),
+            ifelse(is.null(predvalues) || unsupervised, gtxt("-None-"), predvalues),
+            ifelse(is.null(outlierds) || !classify, gtxt("-None-"), outlierds)
         )
     }
 
     spsspivottable.Display(tbl1values, gtxt("Random Forest Summary"), "RANFORSUMMARY",
-        caption=gtxt("Random Forest computed by R randomForest package"),
+        caption=gtxtf("Random Forest computed by R randomForest package %s", packageVersion("randomForest")),
         isSplit=FALSE,
         rowlabels = tbl1lbls,
         collabels=gtxt("Statistics"))
@@ -404,18 +428,18 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
     }
     if (!is.null(forest)) {
         forest = gsub(pattern="\\",replacement="/", x=forest, fixed=TRUE)
-        forestfile=save(res, tbl1lbls, tbl1values, spssdict,file=forest)
+        forestfile=save(res, tbl1lbls, tbl1values, spssdict, file=forest)
     }
     spsspkg.EndProcedure()
     # save requested datasets
     if (!is.null(imputeddataset)) {
-        saveimputeddataset(imputeddataset, spssdict, dta)
+        saveimputeddataset(imputeddataset, spssdict, dta, caseid, caseiddta)
     }
     if (!is.null(predvalues)) {
-        savepreddataset(predvalues, spssdict, res, dep)
+        savepreddataset(predvalues, spssdict, res, dep, caseid, caseiddta)
     }
     if (!is.null(outlierds) && classify) {
-        saveoutliersdataset(outlierds, res, dep, dta)
+        saveoutliersdataset(outlierds, spssdict, res, dep, dta, caseid, caseiddta)
     } else if (!is.null(outlierds)) {
             print(gtxt("Warning: An outlier dataset was requested, but outliers are only available for classification trees:"))
     }
@@ -433,11 +457,15 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
     }
 }
 
-saveimputeddataset = function(imputeddataset, spssdict, dta) {
+saveimputeddataset = function(imputeddataset, spssdict, dta, caseid, caseiddta) {
     tryCatch(
         {
         spssdictionary.SetDictionaryToSPSS(imputeddataset, spssdict)
-        spssdata.SetDataToSPSS(imputeddataset, dta)
+        if (is.null(caseid)) {
+          spssdata.SetDataToSPSS(imputeddataset, dta)
+        } else {
+          spssdata.SetDataToSPSS(imputeddataset, cbind(dta, caseiddta))
+        }
         },
         error=function(e) {
             stop(gtxtf("Error creating dataset: %s", imputeddataset), call.=FALSE)
@@ -445,7 +473,7 @@ saveimputeddataset = function(imputeddataset, spssdict, dta) {
         })
 }
 
-savepreddataset = function(predvalues, spssdict, res, dep) {
+savepreddataset = function(predvalues, spssdict, res, dep, caseid, caseiddta) {
     if (is.null(res$predicted)) {
         print(gtxt("Predicted values are not available in unsupervised mode"))
     } else {
@@ -453,11 +481,34 @@ savepreddataset = function(predvalues, spssdict, res, dep) {
         depvarlevel = depdict["varMeasurementLevel",]
         depvarfmt = depdict["varFormat",]
         depvartype = depdict["varType",]
-        dict <- spssdictionary.CreateSPSSDictionary(c("caseNumber", gtxt("Case Number"), 0, "F8.0", "nominal"),
-        c("predictedValues", gtxtf("predicted Values for %s", dep), depvartype, depvarfmt, depvarlevel))
+        if (!is.null(caseid)) {
+          iddict = spssdict[match(caseid, spssdict["varName",])]
+          idvarlevel = depdict["varMeasurementLevel",]
+          idvarfmt = depdict["varFormat",]
+          idvartype = depdict["varType",]
+          caseidlist = c(caseid, gtxt("ID"), idvartype, idvarfmt, idvarlevel)
+        }
+        
+        dlist = list(c("caseNumber_", gtxt("Case Number"), 0, "F8.0", "nominal"),
+            c("predictedValues_", gtxtf("predicted Values for %s", dep), depvartype, depvarfmt, depvarlevel))
+        if (!is.null(caseid)) {
+          dlist[[3]] = caseidlist
+        }
+        dict = spssdictionary.CreateSPSSDictionary(dlist)
+        
+        #dict <- spssdictionary.CreateSPSSDictionary(c("caseNumber_", gtxt("Case Number"), 0, "F8.0", "nominal"),
+        #c("predictedValues_", gtxtf("predicted Values for %s", dep), depvartype, depvarfmt, depvarlevel))
+        #} else {
+        #  dict <- spssdictionary.CreateSPSSDictionary(c("caseNumber_", gtxt("Case Number"), 0, "F8.0", "nominal"),
+        #    c("predictedValues_", gtxtf("predicted Values for %s", dep), depvartype, depvarfmt, depvarlevel),
+        #    c(caseid, "", idvartype, idvarfmt, idvarlevel))
+        #}
         tryCatch({
             spssdictionary.SetDictionaryToSPSS(predvalues, dict)
             df = data.frame(res$predicted)
+            if (!is.null(caseid)) {
+              df = cbind(df, caseiddta)
+            }
             spssdata.SetDataToSPSS(predvalues, data.frame(row.names(df), df))},
             error=function(e) {print(e)
             print(gtxtf("Failed to create predicted values dataset: %s.", predvalues))
@@ -465,30 +516,81 @@ savepreddataset = function(predvalues, spssdict, res, dep) {
     }
 }
 
-saveoutliersdataset = function(outliercases, res, dep, dta) {
+saveoutliersdataset = function(outliercases, spssdict, res, dep, dta, caseid, caseiddta) {
     # if a dependent variable was given, whether supervised or not
     # it is used to define classes for the outlier calculation
-    # Otherwise everything is considered one class
+    # Otherwise everything is considered one class.
+    # A dependent variable is optional as is a caseid
+    # Only type=classification is allowed
+
     if (is.null(dep)) {
         label = gtxt("Outlier measure (single class)")
     } else {
         label = gtxtf("Outlier measure (class defined by %s)", dep)
     }
-    dict<- spssdictionary.CreateSPSSDictionary(c("caseNumber", gtxt("Case Number"), 0, "F8.0", "nominal"),
-        c("outlier", label , 0, "F8.2", "scale"))
+    casenum = c("caseNumber_", gtxt("Case Number"), 0, "F8.0", "nominal")
+    outl = c("outlier_", label , 0, "F8.2", "scale")
+    dict = list(casenum, outl)
+    if (!is.null(dep)) {
+      depdict = spssdict[match(dep, spssdict["varName",])]
+      depvarlevel = depdict["varMeasurementLevel",]
+      depvarfmt = depdict["varFormat",]
+      depvartype = depdict["varType",]
+      depspec = c(dep, gtxt("Dep Variable"), depvartype, depvarfmt, depvarlevel)
+      dict[[3]] = depspec
+    } ##else {
+      #depspec = NULL
+    #}
+      
+    if (!is.null(caseid)) {
+      iddict = spssdict[match(caseid, spssdict["varName",])]
+      idvarlevel = depdict["varMeasurementLevel",]
+      idvarfmt = depdict["varFormat",]
+      idvartype = depdict["varType",]
+      caseidspec = c(caseid, gtxt("ID"), idvartype, idvarfmt, idvarlevel)
+      dict[[length(dict)+1]] = caseidspec
+    } #else {
+      #  caseidspec = NULL
+    # }
+    dict = spssdictionary.CreateSPSSDictionary(dict)
+    
+    #if (is.null(depspec) && is.null(caseidspec)) {
+    #  dict<- spssdictionary.CreateSPSSDictionary(casenum, outl)
+    #} else if (!is.null(depspec) && !is.null(caseidspec)) {
+    #  dict<- spssdictionary.CreateSPSSDictionary(casenum, outl, depspec, caseidspec)
+    #} else if (is.null(depspec)) {
+    #  dict<- spssdictionary.CreateSPSSDictionary(casenum, outl, caseidspec)
+    #} else {
+    #  dict<- spssdictionary.CreateSPSSDictionary(casenum, outl, depspec)
+    # }
+      
     tryCatch({
-        spssdictionary.SetDictionaryToSPSS(outliercases, dict)
+      ###save(res, dta, dep, caseidspec, file="c:/temp/ranforws.rdata")   #debug
+      spssdictionary.SetDictionaryToSPSS(outliercases, dict)
         if (is.null(dep)) {
-            df = data.frame(outlier(res))
+            df = data.frame(outlier(res$proximity))
         } else {
-            df = data.frame(outlier(res, cls=dta[dep]))
+            df = data.frame(outlier(res$proximity, cls=res$classes))
         }
-        spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df))
-        },
-        error=function(e) {print(e)
-        print(gtxtf("Failed to create outliers dataset: %s", outliercases))
-        spssdictionary.EndDataStep()}
-    ) 
+        if (!is.null(dep)) {
+          if (!is.null(caseid)) {
+            spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df, dta[dep], caseiddta))
+          } else {
+              spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df, dta[dep]))
+          }
+        } else {
+            if (!is.null(caseid)) {
+                spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df, caseiddta))
+            } else {
+                spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df, caseiddta))
+            }
+        }
+    }, error=function(e) {print(e)
+      print(gtxtf("Failed to create outliers dataset: %s", outliercases))
+      spssdictionary.EndDataStep()
+        }
+      )
+    spssdictionary.EndDataStep()
 }
 
 # localization initialization
@@ -526,31 +628,36 @@ Run <- function(args) {
         spsspkg.Template("DEPENDENT", subc="",  ktype="existingvarlist", var="dep", islist=FALSE),
         spsspkg.Template("ENTER", subc="",  ktype="existingvarlist", var="indep", islist=TRUE),
         spsspkg.Template("UNSUPERVISED", subc="", ktype="bool", var="unsupervised"),
+        spsspkg.Template("ID", subc="", ktype="existingvarlist", var="caseid", islist=FALSE),
+        
         spsspkg.Template("MISSING", subc="OPTIONS",  ktype="str", var="missing", islist=FALSE),
         spsspkg.Template("NUMTREES", subc="OPTIONS",  ktype="int", var="numtrees", islist=FALSE),
         spsspkg.Template("VARSSAMPLED", subc="OPTIONS",  ktype="int", var="varssampled", islist=FALSE),
         spsspkg.Template("MINNODESIZE", subc="OPTIONS",ktype="int", var="minnodesize"),
         spsspkg.Template("CLASSPRIORS", subc="OPTIONS", ktype="float", var="classpriors", islist=TRUE),
         spsspkg.Template("RANDOMNUMBERSEED", subc="OPTIONS", ktype="float", var="seed"),
+        
         spsspkg.Template("RETAINFOREST", subc="SAVE", ktype="bool", var="retainforest"),
         spsspkg.Template("PROGRAMFILE", subc="SAVE", ktype="literal", var="programfile"),
         spsspkg.Template("PREDVALUES", subc="SAVE", ktype="literal", var="predvalues"),
         spsspkg.Template("IMPUTEDDATASET", subc="SAVE", ktype="literal", var="imputeddataset"),
         spsspkg.Template("FOREST", subc="SAVE", ktype="literal", var="forest"),
         spsspkg.Template("PROGRAMFILE", subc="SAVE", ktype="literal", var="programfile"),
+        
         spsspkg.Template("IMPORTANCE",  subc="PRINT", ktype="bool", var="importance"),
         spsspkg.Template("VARUSAGE", subc="PRINT", ktype="bool", var="varusage"),
+        
         spsspkg.Template("PARTIALPLOTS", subc="PLOT", ktype="varname", var="partialplots", islist=TRUE),
         spsspkg.Template("MDSPLOT", subc="PLOT", ktype="bool", var="mdsplot"),
         spsspkg.Template("MDSPLOTDIM", subc="PLOT", ktype="int", var="mdsplotdim"),
         spsspkg.Template("VARIABLEIMPORTANCE", subc="PLOT", ktype="bool", var="variableimportance"),
         spsspkg.Template("OUTLIERS", subc="SAVE", ktype="literal", var="outlierds"),
+        
         spsspkg.Template("HELP", subc="", ktype="bool")
     ))
 
     # A HELP subcommand overrides all else
     if ("HELP" %in% attr(args,"names")) {
-        #writeLines(helptext)
         helper(cmdname)
     }
     else {

@@ -17,6 +17,7 @@
 		<Parameter Name="DEPENDENT" ParameterType="VariableName"/>
 		<Parameter Name="ENTER" ParameterType="VariableNameList"/>
 		<Parameter Name="UNSUPERVISED" ParameterType="Keyword"/>
+		<Parameter Name="ID" ParameterType="VariableName"/>
 	</Subcommand>
 	<Subcommand Name="OPTIONS">
 		<Parameter Name="MISSING" ParameterType="Keyword">
