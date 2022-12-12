@@ -8,11 +8,6 @@
 <title>SPSSINC RANFOR Extension command</title>
 
 <link rel="stylesheet" type="text/css" href="extsyntax.css" />
-
-
-
-
-
 </head>
 
 <body>
@@ -24,6 +19,7 @@
 &#39;Random Forest&#39; is a trademark of Breiman and Cutler.</p>
 <div class="syntax">
 <p>SPSSINC RANFOR DEPENDENT=<em>dependent variable</em> ENTER=<em>variable list</em><sup>&#42;</sup><br/>
+ID=id variable<br/>
 UNSUPERVISED = NO<sup>&#42;&#42;</sup> or YES  </p>
 
 <p>/OPTIONS MISSING= RFIMPUTE<sup>&#42;&#42;</sup> or ROUGH or FAIL<br/>
@@ -50,7 +46,8 @@ MDSPLOTDIM=<em>integer</em>  </p>
 </div>
 <p>SPSSINC RANFOR /HELP.  prints this information and does nothing else.</p>
 
-<pre class="example"><code>SPSSINC RANFOR DEPENDENT=mpg ENTER=engine weight.
+<pre class="example"><code>SPSSINC RANFOR DEPENDENT=mpg ENTER=engine weight
+ID = caseid.
 </code></pre>
 
 <p>Split files and weight are not honored by this command.</p>
@@ -59,7 +56,7 @@ MDSPLOTDIM=<em>integer</em>  </p>
 variable names.
 Categorical  variables are automatically converted
 appropriately to factors.  If the dependent variable is categorical,
-classification is performed; otherwise regression is used.</p>
+classification is performed; otherwise regression is done.</p>
 
 <p><strong>UNSUPERVISED</strong> = YES can be used to analyze proximities among the cases.
 The dependent variable can be omitted in this case.  However,
@@ -71,12 +68,15 @@ the MDS plot.</p>
 <p><strong>MISSING</strong> controls missing value behavior.  The choices are:</p>
 
 <ul>
-<li>RFIMPUTE causes a forest to be used to impute missing values
-in predictors.  The dependent variable may not have missing values.
 RFIMPUTE may not be used if UNSUPERVISED=YES.<br/></li>
 <li>ROUGH causes missing values to be imputed for all variables.<br/>
 Scale variables are imputed as the variable median, and categorical variables 
 as the mode with ties broken at random.<br/></li>
+<li>RFIMPUTE causes a forest to be used to impute missing values in predictors.  
+The dependent variable may not have missing values.
+<p>From the underlying package documentation...<br>
+The algorithm starts by imputing NAs using the rough method. Then the forest is estimated with the completed data. The proximity matrix from the forest is used to update the imputation of the NAs. For continuous predictors, the imputed value is the weighted average of the non-missing obervations, where the weights are the proximities. For categorical predictors, the imputed value is the category with the largest average proximity. This process is iterated 
+several times.</p>
 <li>FAIL stops the procedure if missing values are encountered.</li>
 </ul>
 
@@ -109,13 +109,17 @@ Use <strong>RETAINFOREST</strong> to keep the data structure in memory.  This is
 proceeding to prediction with new data in the same session.  The data structure
 will be replaced if this command is rerun.</p>
 
+<p>
+Using a case id variable for the output datasets is important if you plan to merge the results with the input dataset.
+<p class="bullet">&bull;&nbsp;The dataset names must not already be in use.</p>
+</p>
+
 <p><strong>IMPUTEDDATASET</strong> names a dataset to be created with the data values after imputation.
 If no imputation is done but an imputed dataset name is specified, the data values 
 will be the same as the original data apart from any filter in effect.  Value labels and 
 missing value definitions are not applied but can be brought over using APPLY DICTIONARY.</p>
 
-<p><strong>PREDVALUES</strong> names a dataset to be created with the predicted values.  It will contain 
-only the cases sent to the analysis after any filter is applied.
+<p><strong>PREDVALUES</strong> names a dataset to be created with the predicted values.  
 This is not available if UNSUPERVISED=YES</p>
 
 <p><strong>OUTLIERS</strong> names a dataset to be created with an outlier measure for each case in the 
@@ -150,9 +154,14 @@ a large dataset, a lot of memory is required.</p>
 <p><strong>MDSPLOTDIM</strong> specifies the number of dimensions for the plot.
 The default value is 2.</p>
 
-<p>This extension command requires the  R programmability plug-ins and 
-the R randomForest package.</p>
+<h2>Acknowledgements</h2>
+<p>Random Forest is a trademark of Leo Breiman and Adele Cutler.</p>
+<p>The authors of the R randomForest package are  A. Liaw and M. Wiener</p>
+<h2>Requirements</h2>
+<p>This extension command requires the
+the R randomForest package, which is normally installed with the procedure.</p>
 
+<p style="font-size:80%;">© Copyright IBM Corp. 1989, 2022</p>
 </body>
 
 </html>

@@ -264,7 +264,8 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
     }
 
     if (variableimportance) {
-        varimpplot = varImpPlot(res, sort=TRUE, main=gtxt("Variable Importance Plot"), pch=19)
+        varimpplot = varImpPlot(res, sort=TRUE, main=gtxt("Variable Importance Plot"), 
+            pch=15, pt.cex=2.0, n.var=min(40, nrow(res$importance)))
     }
     if (mdsplot) {
         if (is.null(dep)) {
@@ -306,7 +307,11 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             tsstatslbls,
             gtxt("Random Number Seed"), 
             gtxt("Forest Workspace"), 
-            gtxt("Workspace retained in memory"))
+            gtxt("Workspace retained in memory"),
+            gtxt("Case ID variable"),
+            gtxt("Imputed dataset"),
+            gtxt("Predicted values dataset"),
+            gtxt("Outliers dataset"))
         tbl1values=c(res$type, 
             dep, 
             paste(dimnames(dta)[[2]][-1], collapse=" "),
@@ -318,7 +323,11 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             tsstats, 
             seed, 
             ifelse(!is.null(forest),forest,gtxt("--Not saved--")), 
-            ifelse(retainforest, gtxt("Yes"), gtxt("No"))
+            ifelse(retainforest, gtxt("Yes"), gtxt("No")),
+            ifelse(is.null(caseid), gtxt("-None-"), caseid),
+            ifelse(is.null(imputeddataset) || missing == "fail", gtxt("-None-"), imputeddataset),
+            ifelse(is.null(predvalues) || unsupervised, gtxt("-None-"), predvalues),
+            ifelse(is.null(outlierds) || !classify, gtxt("-None-"), outlierds)
         )
         } else { # classification or unsupervised
         tbl1lbls=c(sumlbls, 
@@ -334,6 +343,7 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             gtxt("Outliers dataset")
             
         )
+
         tbl1values=c(res$type, 
             ifelse(is.null(dep), gtxt("None specified"), dep), 
             paste(dimnames(dta)[[2]][-1], collapse=" "),
@@ -496,13 +506,6 @@ savepreddataset = function(predvalues, spssdict, res, dep, caseid, caseiddta) {
         }
         dict = spssdictionary.CreateSPSSDictionary(dlist)
         
-        #dict <- spssdictionary.CreateSPSSDictionary(c("caseNumber_", gtxt("Case Number"), 0, "F8.0", "nominal"),
-        #c("predictedValues_", gtxtf("predicted Values for %s", dep), depvartype, depvarfmt, depvarlevel))
-        #} else {
-        #  dict <- spssdictionary.CreateSPSSDictionary(c("caseNumber_", gtxt("Case Number"), 0, "F8.0", "nominal"),
-        #    c("predictedValues_", gtxtf("predicted Values for %s", dep), depvartype, depvarfmt, depvarlevel),
-        #    c(caseid, "", idvartype, idvarfmt, idvarlevel))
-        #}
         tryCatch({
             spssdictionary.SetDictionaryToSPSS(predvalues, dict)
             df = data.frame(res$predicted)
@@ -582,7 +585,8 @@ saveoutliersdataset = function(outliercases, spssdict, res, dep, dta, caseid, ca
             if (!is.null(caseid)) {
                 spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df, caseiddta))
             } else {
-                spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df, caseiddta))
+                #spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df, caseiddta))
+                spssdata.SetDataToSPSS(outliercases, data.frame(row.names(df), df))
             }
         }
     }, error=function(e) {print(e)
