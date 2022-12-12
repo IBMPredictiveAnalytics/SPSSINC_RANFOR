@@ -5,7 +5,7 @@
 <!--                                                                   -->
 <!-- IBM SPSS Products: Statistics Common                              -->
 <!--                                                                   -->
-<!-- (C) Copyright IBM Corp. 1989, 2013                                -->
+<!-- (C) Copyright IBM Corp. 1989, 2022                                -->
 <!--                                                                   -->
 <!-- US Government Users Restricted Rights - Use, duplication or       -->
 <!-- disclosure restricted by GSA ADP Schedule Contract with IBM       -->
@@ -36,7 +36,7 @@
 		<Parameter Name="PREDVALUES" ParameterType="DatasetName"/>
 		<Parameter Name="OUTLIERS" ParameterType="DatasetName"/>
 		<Parameter Name="FOREST" ParameterType="OutputFile"/>
-		<Parameter Name="RETAINFOREST" ParameterType="LeadingToken"/>
+		<Parameter Name="RETAINFOREST" ParameterType="Keyword"/>
 		<Parameter Name="PROGRAMFILE" ParameterType="OutputFile"/>
 	</Subcommand>
 	<Subcommand Name="PRINT" Occurrence="Optional">
