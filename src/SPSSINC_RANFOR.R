@@ -3,14 +3,15 @@
 # *
 # * IBM SPSS Products: Statistics Common
 # *
-# * (C) Copyright IBM Corp. 1989, 2022
+# * (C) Copyright IBM Corp. 1989, 2026
 # *
 # * US Government Users Restricted Rights - Use, duplication or disclosure
 # * restricted by GSA ADP Schedule Contract with IBM Corp. 
 # ************************************************************************/
 
 #__author__ = "SPSS, JKP"
-#__version__ = "1.2.0"
+#__version__ = "1.3.0"
+
 
 # History
 # 30-Sep-2008 Original version
@@ -18,6 +19,7 @@
 # 10-Apr-2013 Rewrite to simplify and eliminate need for Python plugin
 # 24-May-2013 Tinker with display parameters in var imp plot to deal with long names
 # 26-nOV-2022 Add support for a case id variable in output files and add dep var to outliers dataset.
+# 04-sep-2026 add fit statistics.  bugfix for unsupervised mode first variable omission
 
 # helptext is no longer maintained in favor the syntax help file
 
@@ -128,7 +130,6 @@ This extension command requires the  R programmability plug-ins and
 the R randomForest package.
 "
 
-###options(error=traceback)
 
 ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=NULL, minnodesize=NULL,
     classpriors=NULL, unsupervised=FALSE,
@@ -246,8 +247,8 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
     spssdict <- spssdictionary.GetDictionaryFromSPSS(allvars)
 
     prox = ifelse(is.null(outlierds) && !mdsplot, FALSE, TRUE)
-
-    if (unsupervised) {res  <- tryCatch(randomForest(data.frame(dta[,-1]), ntree=numtrees, mtry=varssampled,
+    #???dta[,-1]
+    if (unsupervised) {res  <- tryCatch(randomForest(data.frame(dta), ntree=numtrees, mtry=varssampled,
         nodesize=minnodesize, classwt = classpriors, proximity=prox), error=function(e) stop(as.character(e), call.=FALSE))
     } else {
         res  <- tryCatch(randomForest(data.frame(dta[,-1]), y=dta[,1], ntree=numtrees, mtry=varssampled,
@@ -302,8 +303,8 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
 
     if (res$type == "regression") {
         resids = dta[1]-res$predicted
-        tbl1lbls=c(sumlbls, gtxt("Residual Mean Square"),
-            gtxt("Explained Variance Percentage"), 
+        tbl1lbls=c(sumlbls, ###gtxt("Residual Mean Square"),
+            ###gtxt("Explained Variance Percentage"), 
             tsstatslbls,
             gtxt("Random Number Seed"), 
             gtxt("Forest Workspace"), 
@@ -311,15 +312,25 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             gtxt("Case ID variable"),
             gtxt("Imputed dataset"),
             gtxt("Predicted values dataset"),
-            gtxt("Outliers dataset"))
+            gtxt("Outliers dataset"),
+            gtxt("Mean absolute error"),
+            gtxt("Root mean squared error"),
+            gtxt("Pseudo R-squared")
+        )
+        mae = mean(abs(res$predicted - dta[[1]]))
+        rmse = sqrt(mean(res$predicted - dta[[1]])^2)
+        ss_res <- sum((dta[[1]] - res$predicted)^2)
+        ss_tot <- sum((dta[[1]] - mean(dta[[1]]))^2)
+        r_squared <- 1 - (ss_res / ss_tot)
+        
         tbl1values=c(res$type, 
             dep, 
             paste(dimnames(dta)[[2]][-1], collapse=" "),
             res$ntree, 
             res$mtry, 
             missing, 
-            sum(resids*resids)/length(res$predicted),
-            1 - var(resids)/var(dta[1]), 
+            ###sum(resids*resids)/length(res$predicted),
+            ###round(1 - var(resids)/var(dta[1]), 4), 
             tsstats, 
             seed, 
             ifelse(!is.null(forest),forest,gtxt("--Not saved--")), 
@@ -327,8 +338,12 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             ifelse(is.null(caseid), gtxt("-None-"), caseid),
             ifelse(is.null(imputeddataset) || missing == "fail", gtxt("-None-"), imputeddataset),
             ifelse(is.null(predvalues) || unsupervised, gtxt("-None-"), predvalues),
-            ifelse(is.null(outlierds) || !classify, gtxt("-None-"), outlierds)
+            ifelse(is.null(outlierds) || !classify, gtxt("-None-"), outlierds),
+            round(mae, 4),
+            round(rmse, 4),
+            round(r_squared,4)
         )
+        ###save(dta, res, mae, rmse, r_squared, ss_res, ss_tot, file="c:/temp/stats.rdata")
         } else { # classification or unsupervised
         tbl1lbls=c(sumlbls, 
             gtxt("Class Priors"), 
@@ -343,7 +358,11 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             gtxt("Outliers dataset")
             
         )
-
+        if (!unsupervised) {
+            ivnames = dimnames(dta)[[2]][-1]
+        } else {
+            ivnames = dimnames(dta)[[2]]
+        }
         tbl1values=c(res$type, 
             ifelse(is.null(dep), gtxt("None specified"), dep), 
             paste(dimnames(dta)[[2]][-1], collapse=" "),
@@ -351,7 +370,7 @@ ranfor = function(dep=NULL, indep, missing="rough",  numtrees=500, varssampled=N
             res$mtry, 
             missing, 
             classpriorstr,
-            ifelse(unsupervised, NA, res$err.rate[[res$ntree]]), 
+            ifelse(unsupervised, NA, round(res$err.rate[[res$ntree]],4)), 
             tsstats, 
             seed, 
             ifelse(!is.null(forest), forest,gtxt("Not saved")), 
