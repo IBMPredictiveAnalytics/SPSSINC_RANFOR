@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!--
+This file is a template for creating help files for custom dialogs.  
+
+-->
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ranfor Estimation</title>
+<STYLE TYPE="text/css"> 
+<!-- 
+
+H1 {font-weight:bold; color:#006699; font-size:125%; }
+H2 {font-weight:bold; color:#006699; font-size:110%; }
+BODY {font-size:80%; }
+TABLE {font-size:100%;}
+
+/* paragraph tags */
+.step {text-indent: -1.3em; margin-left:1.3em; margin-top: 0px;}
+.step-glyph {  }
+.menuselection {margin-left:10px}
+.bullet {list-style-type: disc;margin-top:12px; margin-left:36px; text-indent:-1em; }
+.codeblock {background-color: #ffffe6; display:block; margin-left:5px; padding:5px; }
+
+/* inline tags */
+.code {}                           /*** used to tag pieces of code (syntax, Python, R, HTML, etc.)   ***/
+.screen {font-weight:bold; color:#408080}                       /*** used refer to on-screen text ***/
+.name {font-style: italic}                                                       /*** used to tag names, such as variable names, file names, and so forth ***/
+.runinhead {font-weight: bold} 
+.superscript {vertical-align:super; font-size:80%}
+.subscript {vertical-align:sub; font-size:80%}
+.symbol {}
+
+--> 
+</STYLE>
+</head>
+<body>
+<h1>Ranfor Estimation</h1>
+<p>
+This procedure estimates regression or classification random forests
+</p>
+<p class="step"><span class="step-glyph">►</span>To run this procedure, from the menus choose:</p>
+<p class="menuselection">&nbsp;Analyze<br>&nbsp;&nbsp;Ranfor Estimation...</p>
+<p class="step"><span class="step-glyph">►</span>To estimate a forest, enter dependent (optional) and predictor variables.</p>
+<p>If the dependent variable is categorical (nominal or ordinal), a forest of classification trees is produced; otherwise regression
+trees result.  Any categorical predictors are automatically converted to factors in both cases.  In old versions of R,
+a categorical variable may have no more than 32 categories. The dependent variable is omitted if unsupervised mode is used.
+</p>
+<p class="bullet">&bull;&nbsp;Missing  values require special attention.  See the information below if your data have any user- or system-missing values.
+</p>
+<p>Case weights and split files are not supported by this procedure.</p>
+
+<p><span class="runinhead">Unsupervised mode</span> Check this box to use unsupervised
+mode to analyze proximities among the cases.  A number of statistical measures and 
+plots are unavailable in this mode, and no dependent variable would be specified.
+<p class="bullet">&bull;&nbsp; The proximities matrix grows rapidly in size as
+the number of cases increases, and it may not be practical to use this on
+datasets with a very large number of variables.
+
+<h2>Options</h2>
+<p>
+The Options dialog specifies missing value treatment and parameters to control the estimation.
+</p>
+<p><span class="runinhead">Missing Values.</span> There are three choices for handling missing values.
+<p class="bullet">&bull;&nbsp;Rough, which works for all variables, imputes missing values in
+scale variables as the variable's median value.  For categorical variables, the modal value is used
+with ties broken at random.</p>
+<p class="bullet">&bull;&nbsp;RF impute, which is only available for predictors, imputes missing values 
+based on a random forest.  
+<p>From the underlying package documentation...<br>
+The algorithm starts by imputing NAs using the rough method. Then the forest is estimated with the completed data. The proximity matrix from the forest is used to update the imputation of the NAs. For continuous predictors, the imputed value is the weighted average of the non-missing obervations, where the weights are the proximities. For categorical predictors, the imputed value is the category with the largest average proximity. This process is iterated 
+several times.</p>
+
+<em>If you
+choose this option, any missing values in the dependent variable will cause the procedure to fail.</em>
+You can use a filter to exclude such cases.  <em>Note: this option requires computing a matrix whose
+size is of order the square of the number of cases, so it is not recommended for large datasets</em>
+</p>
+<p class="bullet">&bull;&nbsp;Fail causes the procedure to stop if missing values are found.
+</p>
+<p><span class="runinhead">Number of Trees.</span> specifies how many trees should be constructed.
+The default value is 500.  Some of the output plots are helpful in determining how many trees to use.
+<p><span class="runinhead">Variables Sampled at Each Node.</span> determines how many variables,
+chosen at random, are considered each time a node is split.  The default values depend on whether the trees
+are classification or regression trees.  For classification trees, the default is the square root of the number of
+predictors.  For regression trees, it is one third of the number of predictors.
+<p><span class="runinhead">Minimum Leaf Node Size.</span>Enter the minimum size for leaf nodes in
+the tree.  The default value is 1 for classification trees and 5 for regression.
+<p><span class="runinhead">R Random Number Seed.</span>
+Enter a number to set the seed for the R random number generator in order to be able to reproduce
+the output if the procedure is rerun.  This does not affect the SPSS Statistics random number
+generators - only the R generator.
+</p>
+<p><span class="runinhead">Class Priors for Classification Trees.</span>
+Enter a list of weights, one per category of the dependent variable.  Values should be in ascending
+order of the categories.  The weights need not sum to 1.  This choice only applies to categorical
+dependent variables and is ignored otherwise.
+<h2>Save</h2>
+<p>
+The Save dialog specifies the files and dataset to be created by the procedure.
+Using a case id variable is important if you plan to merge the results with the input dataset.
+<p class="bullet">&bull;&nbsp;The dataset names must not already be in use.</p>
+</p>
+<p><span class="runinhead">Name for New Predicted Values Dataset.</span> Specify a dataset name
+in order to create a dataset containing the predicted values for the cases passed to the R package.  
+
+<p><span class="runinhead">Name for New Imputed Dataset.</span> Specify a dataset name
+in order to create a dataset containing the cases with missing values imputed.  If
+no imputation was done, the values are the same as those passed in.  Missing value definitions and value labels
+are not copied but can be applied with Apply Dictionary.  </p>
+
+<p><span class="runinhead">Name for New Outliers Dataset.</span> Specify a dataset name
+in order to create a dataset containing an outlier measure for each case. 
+The outlying measure of a case is computed as n / sum(squared proximity) where n 
+is the number of cases, normalized by subtracting the median and divided by the MAD
+within each class.It is only available for
+classification trees.  <em>Note that this requires computation of a matrix of order n**2, so use it
+with caution</em></p>
+
+<p><span class="runinhead">Save Estimated Forest As R Workspace.</span> Specify a file 
+in order to save the random forest data structure for future use, including for making predictions
+with new data.
+<p><span class="runinhead">Save estimated forest in memory.</span> Check this box
+to keep the random forest data structure in memory for use in prediction with new data in the
+current session.  Use Ranfor Predict on the Analyze menu to make predictions with the most
+recently estimated tree.
+
+<h2>Output</h2>
+<p>
+The Output dialog specifies optional tables and charts to be displayed.
+</p>
+<p><span class="runinhead">Variable Usage Tree.</span> Check this box to produce a table
+showing how many times each predictor was actually used in splitting nodes across all the trees in the forest.
+<p><span class="runinhead">Variable Importance.</span> Check this box to produce a plot
+of the predictor variables importance.
+<p><span class="runinhead">Partial Plots for All Variables.</span> Check this box to produce
+partial plots for all predictors.  Each partial plot shows the marginal effect of the variable on the
+dependent variable or the class probability as a function of the number of trees in the forest.
+
+<p><span class="runinhead">Multi-Dimensional Scaling Plot</span> Check this box
+to produce a plot of the case proximities.  You can specify the number of dimensions
+for the plot.
+<p class="bullet">&bull;&nbsp; This plot is only available if a categorical
+dependent variable was specified
+<p class="bullet">&bull;&nbsp; This requires a lot of memory if the dataset is large.
+
+<h2>Acknowledgements</h2>
+<p>Random Forest is a trademark of Leo Breiman and Adele Cutler.</p>
+<p>The authors of the R randomForest package are  A. Liaw and M. Wiener</p>
+
+<h2>Additional Features</h2>
+<p>Run the command</p>
+<p class="codeblock">SPSSINC RANFOR /HELP.</p>
+<p>or press F1 with the cursor on an instance of the command to display the entire syntax description.  
+In syntax you can specify a specific list of predictors for
+which partial plots should be produced.  </p>
+
+<h2>Requirements</h2>
+<p>
+This command requires the  the R randomForest package, which is normally installed with the command.
+</p>
+
+<p style="font-size:80%;">© Copyright IBM Corp. 1989, 2022</p>
+</body>
+</html>
